@@ -1,6 +1,7 @@
 # MysqlT
 伪造Myslq服务端,并利用Mysql逻辑漏洞来获取客户端的任意文件反击攻击者
 
+使用教程:https://www.bilibili.com/video/av53068648/
 
 首次使用请在程序中输入Mysql Help,来查看帮助命令
 
