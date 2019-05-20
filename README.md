@@ -3,7 +3,21 @@
 
 当你需要将本地文件上传到服务器时,没有合适的上传器时,也可以使用本软件,小巧玲珑
 
+该程序利用了Mysql客户端LoadData的逻辑漏洞
+
 与其它软件不同,本软件支持大文件无损传输
+
+支持大文件无损传输
+
+支持用户验证
+
+支持自定义Mysql版本
+
+随机的Salt加密,加上用户验证,让攻击者毫无察觉
+
+Net文件夹是.NET程序只能运行在Windows
+
+NetCore文件夹是.NET CORE程序可以运行在 Windows,Linux,MAC
 
 使用教程:https://www.bilibili.com/video/av53068648/
 
