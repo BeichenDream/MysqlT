@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mysql.MysqlData
 {
+    [Serializable]
     public class MysqlClient
     {
         public MysqlClient(string host)
