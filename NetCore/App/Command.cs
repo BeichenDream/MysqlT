@@ -41,10 +41,10 @@ namespace MysqlT.App
                            
                             value[i] = Convert.ChangeType(match[i + 2].Value, parameterInfos[i].ParameterType);
                         }
-                        catch (Exception)
+                        catch (Exception e)
                         {
 
-                            return "参数类型不匹配";
+                            return "参数类型不匹配 E:"+e.Message;
                         }
                     }
                     try
@@ -52,9 +52,9 @@ namespace MysqlT.App
                         return (string)methodInfo.Invoke(type, value);
                         
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
-                        return "方法返回值有误";
+                        return "方法返回值有误 E:"+e.Message;
                     }
                   
 
