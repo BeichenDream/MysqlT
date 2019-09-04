@@ -20,78 +20,6 @@ namespace Mysql.MysqlData
             t.AddRange(Encoding.Default.GetBytes(file));
             return t.ToArray();
         }
-
-        public static void TransformationFileData(ref byte[] data)
-        {
-            if (data.Length == 4)
-            {
-                data = Encoding.Default.GetBytes("NULL");
-            }
-            else
-            {
-                byte[] b_packet_length = { 0x00, 0x00, 0x00, 0x00 };  //int 4个字节 mysql 3个 补一个
-                Array.Copy(data, 0, b_packet_length, 0, 3);
-                List<byte> t = new List<byte>();
-                t.AddRange(data);
-                int pacet_length = BitConverter.ToInt32(b_packet_length, 0);
-                {
-                    int j = (int)Math.Floor((double)((t.Count - 4) / (pacet_length + 4)));
-                    for (int i = 0; i < j; i++)
-                    {
-                        int f = i * pacet_length;
-                        t.RemoveRange(f, 4);
-                    }
-                    if (j * pacet_length == t.Count - 4)
-                    {
-                        t.RemoveRange(t.Count - 4, 4);
-
-                    }
-                    else
-                    {
-
-                        t.RemoveRange(t.Count - 4, 4);
-                        t.RemoveRange(j * pacet_length, 4);
-                    }
-                }
-                data = t.ToArray();
-                t = null;
-            }
-        }
-        public static void TransformationFileData(ref List<byte> data)
-        {
-            if (data.Count == 4)
-            {
-                data.Clear();
-                data.AddRange(Encoding.Default.GetBytes("NULL"));
-            }
-            else
-            {
-                byte[] b_packet_length = { 0x00, 0x00, 0x00, 0x00 };  //int 4个字节 mysql 3个 补一个
-                b_packet_length[0] = data[0];
-                b_packet_length[1] = data[1];
-                b_packet_length[2] = data[2];
-                int pacet_length = BitConverter.ToInt32(b_packet_length, 0);
-                {
-                    int j = (int)Math.Floor((double)((data.Count - 4) / (pacet_length + 4)));
-                    for (int i = 0; i < j; i++)
-                    {
-                        int f = i * pacet_length;
-                        data.RemoveRange(f, 4);
-                    }
-                    if (j * pacet_length == data.Count - 4)
-                    {
-                        data.RemoveRange(data.Count - 4, 4);
-
-                    }
-                    else
-                    {
-
-                        data.RemoveRange(data.Count - 4, 4);
-                        data.RemoveRange(j * pacet_length, 4);
-                    }
-                }
-            }
-        }
         public static void TransformationLoginData(byte[] data, UserInfo ui)
         {
             ArrayT<byte> t = new ArrayT<byte>();
@@ -115,7 +43,6 @@ namespace Mysql.MysqlData
             byte[] username = t.Get(0, _t[0]);
             ui.username = (Encoding.Default.GetString(username));
             byte[] password = null;
-            byte[] info = null;
             //PassWord
             if (t.Get(_t[0] + 1) == 0x14)
             {
@@ -212,40 +139,12 @@ namespace Mysql.MysqlData
             byte[] data = { 0x07, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00 };
             return data;
         }
-        public static bool IsLoadData(byte[] data)
-        {
+        public static byte[] GetQueryError() {
+            byte[] data = { 0x9c, 0x00, 0x00, 0x01, 0xff, 0x28, 0x04, 0x23, 0x34, 0x32, 0x30, 0x30, 0x30, 0x59, 0x6f, 0x75, 0x20, 0x68, 0x61, 0x76, 0x65, 0x20, 0x61, 0x6e, 0x20, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x20, 0x69, 0x6e, 0x20, 0x79, 0x6f, 0x75, 0x72, 0x20, 0x53, 0x51, 0x4c, 0x20, 0x73, 0x79, 0x6e, 0x74, 0x61, 0x78, 0x3b, 0x20, 0x63, 0x68, 0x65, 0x63, 0x6b, 0x20, 0x74, 0x68, 0x65, 0x20, 0x6d, 0x61, 0x6e, 0x75, 0x61, 0x6c, 0x20, 0x74, 0x68, 0x61, 0x74, 0x20, 0x63, 0x6f, 0x72, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x64, 0x73, 0x20, 0x74, 0x6f, 0x20, 0x79, 0x6f, 0x75, 0x72, 0x20, 0x4d, 0x79, 0x53, 0x51, 0x4c, 0x20, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x20, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x20, 0x66, 0x6f, 0x72, 0x20, 0x74, 0x68, 0x65, 0x20, 0x72, 0x69, 0x67, 0x68, 0x74, 0x20, 0x73, 0x79, 0x6e, 0x74, 0x61, 0x78, 0x20, 0x74, 0x6f, 0x20, 0x75, 0x73, 0x65, 0x20, 0x6e, 0x65, 0x61, 0x72, 0x20, 0x27, 0x27, 0x27, 0x20, 0x61, 0x74, 0x20, 0x6c, 0x69, 0x6e, 0x65, 0x20, 0x31 };
+            return data;
 
-            byte[] t_data = { 0x00, 0x00 };
-            Array.Copy(data, 5 - 1, t_data, 0, 2);
-            short value = BitConverter.ToInt16(t_data, 0);
-            char v = Convert.ToString(value, 2).Reverse<char>().ToArray()[8 - 1];
-            if (v == '1')   //判断是否支持Can Use LOAD DATA LOCAL   0是不支持,1是支持
-            {
-                return true;
-            }
-            else
-            {
-
-                return false;
-            }
         }
-        public static bool IsFileData(ref byte[] data)
-        {
-            byte[] t_data = new byte[4];
-            byte[] ConfirmData = { 0x00, 0x00, 0x00, 0x03 };
-            //  int a = BitConverter.ToInt32(data, data.Length - 4);
-            Array.Copy(data, data.Length - 4, t_data, 0, 4);
-            if (t_data[0] == ConfirmData[0] && t_data[1] == ConfirmData[1] && t_data[2] == ConfirmData[2] && t_data[3] != 0x00 && data.Length > 5 || data.Length == 4)
-            {
 
-                return true;
-            }
-            else
-            {
-
-                return false;
-            }
-        }
 
 
     }
