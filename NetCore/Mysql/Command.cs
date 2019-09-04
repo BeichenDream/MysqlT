@@ -110,8 +110,8 @@ namespace Mysql
             }
         }
         public static string MysqlRun() {
-            Mysql.open();
-            return "已通知进程开启";
+            Mysql.Open();
+            return "已通知线程开启";
         }
         public static string MysqlStop() {
             Mysql.Stop();

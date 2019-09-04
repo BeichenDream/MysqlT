@@ -45,31 +45,7 @@ namespace Mysql
 
         }
 
-        private static void LoadMysqlUser() {
-         string[]  data=  log.FileRead("User.data");
-            foreach (var item in data)
-            {
-              string[] _t= Regex.Split(item, "-----", RegexOptions.IgnoreCase);
-                if (_t.Length == 2) {
-                    if (!config.MysqlUser.ContainsKey(_t[0]))
-                    {
-                        config.MysqlUser.Add(_t[0], _t[1]);
-                    }
-                    
-                }
-            }
-        }
-        private static void LoadFile() {
-            string[] data = log.FileRead("File.data");
-            foreach (var item in data)
-            {
-                
-                if (!config.File.Contains(item)&&item.Length!=0&&item.Replace("\\","/").Split('/').Length>1)
-                {
-                    config.File.Add(item);
-                }
-            }
-        }
+
         public static void init() {
             using (FileStream stream = new FileStream("MysqlT.bin", FileMode.OpenOrCreate))
             {
@@ -80,8 +56,6 @@ namespace Mysql
                 }
             }
             GetConfig();
-            LoadFile();
-            LoadMysqlUser();
    
         }
         public static void SaveConfig() {
