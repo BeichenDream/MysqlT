@@ -24,7 +24,7 @@ namespace Mysql
         public  bool LoginCheck = true;
         public string Host = "0.0.0.0";
         public int Port = 3306;
-        public string Version = "5.5.54-log";
+        public string Version = "5.7.54-log";
         private static Config config;
         private static object o = new object();
         public static Config GetConfig() {
