@@ -1,4 +1,11 @@
 # MysqlT
+# 404StarLink 2.0 - Galaxy
+![](https://github.com/knownsec/404StarLink-Project/raw/master/logo.png)
+
+MysqlT 是 404Team [星链计划2.0](https://github.com/knownsec/404StarLink2.0-Galaxy)中的一环，如果对ServerScan有任何疑问又或是想要找小伙伴交流，可以参考星链计划的加群方式。
+
+- [https://github.com/knownsec/404StarLink2.0-Galaxy#community](https://github.com/knownsec/404StarLink2.0-Galaxy#community)
+
 伪造Myslq服务端,并利用Mysql逻辑漏洞来获取客户端的任意文件反击攻击者
 
 当你需要将本地文件上传到服务器时,没有合适的上传器时,也可以使用本软件,小巧玲珑
