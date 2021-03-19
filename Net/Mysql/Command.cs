@@ -93,6 +93,14 @@ namespace Mysql
                 return data;
             }
         }
+        public static string RemoveAllFile()
+        {
+            lock (config.File)
+            {
+                config.File.RemoveRange(0, config.File.Count);
+            }
+            return "ok";
+        }
         public static string AddUser(string username, string password) {
             lock (config.MysqlUser)
             {
