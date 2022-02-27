@@ -54,7 +54,8 @@ namespace MysqlT.App
         }
         public static string change(UserInfo userInfo)
         {
-            string data = string.Format("Host:{0} Username:{1} PassWord:{2} Qpassword:{3} LoadData:{4} Salt:{5} Info:{6}", userInfo.host, userInfo.username, userInfo.password, userInfo.Qpassword, userInfo.LoadData.ToString(), userInfo.Salt, userInfo.info);
+           // string data = string.Format("", userInfo.host, userInfo.username, userInfo.password, userInfo.Qpassword, userInfo.LoadData.ToString(), userInfo.Salt, userInfo.info);
+            string data = $"Host:{userInfo.host} Username:{userInfo.username} PassWord:{userInfo.password} Qpassword:{userInfo.Qpassword} LoadData:{userInfo.LoadData.ToString()} Salt:{ userInfo.Salt} Info:{userInfo.info}";
             return data;
         }
 

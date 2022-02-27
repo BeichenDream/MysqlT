@@ -96,8 +96,8 @@ namespace MysqlT.App
         /// <returns>整数型</returns>
         public int Count()
         {
-
-            return value.Length;
+            int Count = value.Length;
+            return Count;
         }
         /// <summary>
         /// 删除一定范围内的元素

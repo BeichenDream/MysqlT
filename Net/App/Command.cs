@@ -21,7 +21,7 @@ namespace MysqlT.App
             Type type = typeof(Mysql.Command);
             Regex regex = new Regex("\\S+");
             MatchCollection match = regex.Matches(cmdtext);
-            if (match.Count<2)
+            if (match.Count < 2)
             {
                 return "操作不存在";
             }
@@ -52,9 +52,9 @@ namespace MysqlT.App
                         return (string)methodInfo.Invoke(type, value);
                         
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
-                        return "方法返回值有误";
+                        return $"方法返回值有误 执行时发生异常 {e.Message}";
                     }
                   
 
