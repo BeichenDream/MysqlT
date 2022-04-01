@@ -20,5 +20,10 @@ namespace Mysql.MysqlData
         public int Sate { get; set; }
         public int FileNumber { get; set; }
         public int ClientNumber { get; set; }
+
+        public override string ToString()
+        {
+            return $"Host:{Host} Sate:{Sate} FileNumber:{FileNumber} ClientNumber:{ClientNumber}";
+        }
     }
 }

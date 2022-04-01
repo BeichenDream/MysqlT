@@ -101,6 +101,30 @@ namespace Mysql
             }
             return "ok";
         }
+
+
+        public static string ClearUsers()
+        {
+            config.MysqlUser.Clear();
+            return "ok";
+        }
+
+        public static string ResetClient()
+        {
+            config.ClientInfo.Clear();
+            return "ok";
+        }
+
+        public static string Reset()
+        {
+            config.LoginCheck = false;
+            config.ClientInfo.Clear();
+            config.MysqlUser.Clear();
+            config.File.Clear();
+            return "ok";
+        }
+
+
         public static string AddUser(string username, string password) {
             lock (config.MysqlUser)
             {

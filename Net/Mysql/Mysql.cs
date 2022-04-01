@@ -82,9 +82,9 @@ namespace Mysql
                     thread.Start(userInfo);
                     userInfo.client.Send(MysqlGainData.GetHello(config.Version, Thread.GetDomainID()+100, userInfo.Salt));
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    MysqlT.App.Command.Write("Mysql 已退出", "Eooro", ConsoleColor.Red);
+                    MysqlT.App.Command.Write($"Mysql 已退出 Exception:" + e.Message, "error", ConsoleColor.Red);
 
                 }
             }

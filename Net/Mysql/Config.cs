@@ -26,11 +26,11 @@ namespace Mysql
         public int Port = 3306;
         public string Version = "5.7.54-log";
         private static Config config;
-        private static object o = new object();
+        private static object lockObj = new object();
         public static Config GetConfig() {
             if (config==null)
             {
-                lock (o)
+                lock (lockObj)
                 {
                     if (config==null)
                     {

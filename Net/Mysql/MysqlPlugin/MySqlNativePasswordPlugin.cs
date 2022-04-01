@@ -13,7 +13,7 @@ namespace Mysql.MysqlPlugin
         {
             if (password.Length == 0)
             {
-                return new byte[1];
+                return new byte[0];
             }
             SHA1 sha = SHA1.Create();
             byte[] array = null;
@@ -44,13 +44,14 @@ namespace Mysql.MysqlPlugin
             password = password == null || password.Length == 0 ? "root" : password;
             byte[] buffer = Get411Password(password, Encoding.Default.GetBytes(salt));
             password = "";
+            StringBuilder passwordbuf = new StringBuilder();
             foreach (var item in buffer)
             {
                 string _titem = Convert.ToString(item, 16);
                 _titem = _titem.Length == 1 ? "0" + _titem : _titem;
-                password += _titem;
+                passwordbuf.Append(_titem);
             }
-            return password;
+            return passwordbuf.ToString();
         }
         private MySqlNativePasswordPlugin() {
 
