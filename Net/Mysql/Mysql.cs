@@ -38,7 +38,7 @@ namespace Mysql
             }
             catch (Exception e)
             {
-                MysqlT.App.Command.Write("Mysql服务端启动失败,请检查端口是否已经被占用!", "Error:"+e.Message, ConsoleColor.Red);
+                MysqlT.App.Command.Write("Mysql服务端启动失败,请检查端口是否已经被占用!", $"Error:{e.Message}", ConsoleColor.Red);
                 throw;
             }
 

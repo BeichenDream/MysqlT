@@ -121,6 +121,37 @@ namespace Mysql
             Config.SaveConfig();
             return "已保存配置到本地文件";
         }
+        public static string RemoveAllFile()
+        {
+            lock (config.File)
+            {
+                config.File.RemoveRange(0, config.File.Count);
+            }
+            return "ok";
+        }
+
+
+        public static string ClearUsers()
+        {
+            config.MysqlUser.Clear();
+            return "ok";
+        }
+
+        public static string ResetClient()
+        {
+            config.ClientInfo.Clear();
+            return "ok";
+        }
+
+        public static string Reset()
+        {
+            config.LoginCheck = false;
+            config.ClientInfo.Clear();
+            config.MysqlUser.Clear();
+            config.File.Clear();
+            return "ok";
+        }
+
         public static string AppExit() {
             Config.SaveConfig();
             Environment.Exit(0);
